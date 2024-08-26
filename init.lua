@@ -1,7 +1,7 @@
 --[[
 
 =====================================================================
-==================== READ THIS BEFORE CONTINUING ====================
+=================== READ THIS BEFORE CONTINUING ====================
 =====================================================================
 ========                                    .-----.          ========
 ========         .----------------------.   | === |          ========
@@ -165,7 +165,9 @@ vim.opt.scrolloff = 10
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 -- vim.keymap.set('i', 'jk', '<Esc>')
 -- vim.keymap.set('n', '<C-d>', '<C-d>zz')
--- vim.keymap.set('n', '<C-u>', '<C-u>zz')
+-- VIM.KEYMAP.SET('N', '<C-U>', '<C-U>ZZ')
+-- vim.keymap.del('n', 's')
+-- vim.keymap.del('n', 'S')
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
@@ -860,7 +862,20 @@ require('lazy').setup({
       -- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
       -- - sd'   - [S]urround [D]elete [']quotes
       -- - sr)'  - [S]urround [R]eplace [)] [']
-      require('mini.surround').setup()
+      require('mini.surround').setup {
+        mappings = {
+          add = 'ys', -- Add surrounding in Normal and Visual modes
+          delete = 'ds', -- Delete surrounding
+          find = 'fs', -- Find surrounding (to the right)
+          find_left = 'Fs', -- Find surrounding (to the left)
+          highlight = 'hs', -- Highlight surrounding
+          replace = 'rs', -- Replace surrounding
+          update_n_lines = 'ns', -- Update `n_lines`
+
+          suffix_last = 'l', -- Suffix to search with "prev" method
+          suffix_next = 'n', -- Suffix to search with "next" method
+        },
+      }
 
       -- Simple and easy statusline.
       --  You could remove this setup call if you don't like it,
@@ -996,3 +1011,4 @@ vim.keymap.set('n', '<leader>to', ':tabonly<CR>')
 -- vim.keymap.set('n', '<leader>tm', ':tabmove<Space>')
 -- vim.keymap.set('n', 'gt', ':tabnext<CR>')
 -- vim.keymap.set('n', 'gT', ':tabprevious<CR>')
+-- require('onedark').load()
